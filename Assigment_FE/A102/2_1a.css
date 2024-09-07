@@ -1,0 +1,86 @@
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    font-size: 18px;*/
+/*}*/
+
+/*!* Container Layout *!*/
+/*.container {*/
+/*    display: grid;*/
+/*    gap: 10px;*/
+/*    padding: 20px;*/
+/*}*/
+
+/*@media (min-width: 1024px) {*/
+/*    .container {*/
+/*        !* Thêm cột trống giữa Main và Extra-Image *!*/
+/*        grid-template-columns: 2fr 2fr;*/
+/*        grid-template-rows: 2fr 2fr;*/
+/*        grid-template-areas:*/
+/*            "div1 div2"*/
+/*            "div3 div4"*/
+/*    }*/
+
+/*    .header {*/
+/*        grid-area: header;*/
+/*    }*/
+
+/*    .menu {*/
+/*        grid-area: menu;*/
+/*    }*/
+
+/*    .hero {*/
+/*        grid-area: hero;*/
+/*    }*/
+
+/*    .main {*/
+/*        grid-area: main;*/
+/*    }*/
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: #577590;
+}
+
+.card {
+    display: flex;
+    width: calc(50% - 12px);
+    background-color: white;
+    border: 1px solid black;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.ngay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    background-color: crimson;
+    color: white;
+}
+
+.noidung {
+    flex: 4;
+    margin-left: 20px;
+    /*background-color: blue;*/
+}
+.button{
+    padding: 20px;
+    border-radius: 30px;
+    border-color: deepskyblue;
+    background-color: transparent;
+    float: right;
+    margin-right: 1cm;
+    margin-top: 2cm;
+    font-size: 20px;
+}

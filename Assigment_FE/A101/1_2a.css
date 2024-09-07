@@ -1,0 +1,121 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Container Layout */
+.container {
+    display: grid;
+    /*gap: 10px; tạo ra khoảng cách giữa 2 part*/
+    padding: 0px;
+}
+
+/* Section Styles */
+.header {
+    background-color: #a0c4ff;
+    padding: 50px;
+    text-align: center;
+}
+
+.content {
+    background-color: #bde0fe;
+    padding: 50px;
+    text-align: center;
+}
+
+.signup {
+    background-color: #ffafcc;
+    padding: 50px;
+    text-align: center;
+}
+
+.feature {
+    background-color: #ffc8dd;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Mobile Layout */
+@media (max-width: 767px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablet Layout */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "header header"
+            "content content"
+            "signup feature1"
+            "feature2 feature3";
+    }
+
+    .header {
+        grid-area: header;
+    }
+
+    .content {
+        grid-area: content;
+    }
+
+    .signup {
+        grid-area: signup;
+    }
+
+    .feature1 {
+        grid-area: feature1;
+    }
+
+    .feature2 {
+        grid-area: feature2;
+    }
+
+    .feature3 {
+        grid-area: feature3;
+    }
+}
+
+/* Desktop Layout */
+@media (min-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+            "header header header"
+            "feature1 feature2 feature3"
+            "signup signup signup"
+            "content content content";
+    }
+
+    .header {
+        grid-area: header;
+    }
+
+    .content {
+        grid-area: content;
+    }
+
+    .signup {
+        grid-area: signup;
+    }
+
+    .feature1 {
+        grid-area: feature1;
+    }
+
+    .feature2 {
+        grid-area: feature2;
+    }
+
+    .feature3 {
+        grid-area: feature3;
+    }
+}

@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+    background-color: #cccccc;
+}
+
+.image {
+    overflow: clip;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: "news welcome agents";
+        grid-template-rows: auto auto;
+
+        .news {
+            grid-area: news;
+        }
+
+        .welcome {
+            grid-area: welcome;
+        }
+
+        .agents {
+            grid-area: agents;
+        }
+    }
+
+    .postList {
+        grid-template-columns: 0.5fr 3.5fr;
+        /*grid-template-rows: auto auto;*/
+        grid-template-areas: "image content";
+        display: grid;
+        gap: 10px;
+        padding: 20px;
+        border-bottom: 1px dashed black;
+
+        .image {
+            
+            grid-area: image;
+        }
+
+        .content {
+            grid-area: content;
+        }
+    }
+
+    .account {
+        grid-template-columns: 0.5fr 3.5fr;
+        grid-template-rows: auto auto;
+        grid-template-areas: "avatar profile";
+        display: grid;
+        gap: 10px;
+        padding: 20px;
+        border-bottom: 1px dashed black;
+        .avatar {
+            grid-area: avatar;
+        }
+
+        .profile {
+            grid-area: profile;
+        }
+    }
+}
+
+/*@media (min-width: 1024px) {*/
+/*    */
+/*}*/

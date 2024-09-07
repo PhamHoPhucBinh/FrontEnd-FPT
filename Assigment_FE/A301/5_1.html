@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5_1</title>
+</head>
+<body>
+
+<script>
+    const users = [
+        {
+            id: 1,
+            first_name: "Eamon",
+            last_name: "Harhoff",
+            email: "eharhoff0@imageshack.us",
+            gender: "Male",
+            age: 76,
+            salary: 18888
+        },
+        {
+            id: 2,
+            first_name: "Laney",
+            last_name: "Whittam",
+            email: "lwhittam1@issuu.com",
+            gender: "Female",
+            age: 42,
+            salary: 15018
+        },
+        {
+            id: 3,
+            first_name: "Lynett",
+            last_name: "Twinberrow",
+            email: "ltwinberrow2@gov.uk",
+            gender: "Female",
+            age: 99,
+            salary: 13343
+        }
+    ];
+    const filteredUsers = users.filter((users) => users.gender === "Male" && users.age > 40);
+    console.log(filteredUsers);
+
+    const fullName = users.map((users) => `${users.first_name} ${users.last_name}`);
+    console.log(fullName)
+
+    const avgAge = users.reduce((accumulator, user) => accumulator + user.age / users.length, 0);
+    console.log(avgAge);
+</script>
+</body>
+</html>

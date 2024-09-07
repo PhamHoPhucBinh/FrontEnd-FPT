@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 5 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        .form-section-title {
+            font-weight: bold;
+            border-bottom: 1px solid #e83e8c;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .last-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .reset-button {
+            border: none;
+            background: none;
+            color: #a7aeb4;
+            cursor: pointer;
+        }
+
+        .btn-search {
+            background-color: #e11e78;
+            color: #fff;
+        }
+        .form-check :checked{
+            background-color: #e11e78;
+            color: #e11e78;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!--        phan tren-->
+    <div class="row">
+        <div class="col-10">
+            <!--            spe+rela-->
+            <div class="row">
+                <!--                specific-->
+                <div class="col-9">
+                    <div class="col-12">
+                        <h6 class="form-section-title">Specific</h6>
+                        <div class="row">
+                            <div class="col-4">
+                                <label>First name contains</label>
+                                <input type="text" class="form-control" placeholder="First name">
+                            </div>
+                            <div class="col-4">
+                                <label>Last name contains</label>
+                                <input type="text" class="form-control" placeholder="Last name">
+                            </div>
+                            <div class="col-4">
+                                <label>Email contains</label>
+                                <input type="email" class="form-control" placeholder="E-mail">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 ">
+                                <label>Correspondence</label>
+                                <select class="form-control">
+                                    <option>Doesn't matter</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </div>
+                            <div class="col-8 ">
+                                <label>Date joined</label>
+                                <div class="d-flex">
+                                    <input type="date" class="form-control mr-2">
+                                    <span>-</span>
+                                    <input type="date" class="form-control ml-2">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--                relative-->
+                <div class="col-3">
+                    <h6 class="form-section-title">Related</h6>
+                    <label>Team</label>
+                    <select class="form-control">
+                        <option>Team option</option>
+                        <option>Team 1</option>
+                        <option>Team 2</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="mt-2 col-12">
+                <div>
+                    <h6 class="form-section-title">Permissions</h6>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <label>Group</label>
+                        <select class="form-control">
+                            <option>Choose group</option>
+                            <option>Group 1</option>
+                            <option>Group 2</option>
+                        </select>
+                    </div>
+                    <div class="col-6 flex-column d-flex">
+                        <label>Permission</label>
+                        <label>
+                            <select class="form-control">
+                                <option>Choose permission</option>
+                                <option>Permission 1</option>
+                                <option>Permission 2</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="col-md-12">
+                <h6 class="form-section-title">Attributes</h6>
+                <div class="mb-3">
+                    <label>Active</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="activeStatus" id="activeDoesntMatter"
+                               checked>
+                        <label class="form-check-label" for="activeDoesntMatter">Doesn't matter</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="activeStatus" id="activeYes">
+                        <label class="form-check-label" for="activeYes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="activeStatus" id="activeNo">
+                        <label class="form-check-label" for="activeNo">No</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label>Online status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="onlineStatus" id="onlineDoesntMatter"
+                               checked>
+                        <label class="form-check-label" for="onlineDoesntMatter">Doesn't matter</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="onlineStatus" id="onlineOnline">
+                        <label class="form-check-label" for="onlineOnline">Online</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="onlineStatus" id="onlineAway">
+                        <label class="form-check-label" for="onlineAway">Away</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="onlineStatus" id="onlineOffline">
+                        <label class="form-check-label" for="onlineOffline">Offline</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Superuser status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="superuserStatus" id="superuserDoesntMatter"
+                               checked>
+                        <label class="form-check-label" for="superuserDoesntMatter">Doesn't matter</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="superuserStatus" id="superuserYes">
+                        <label class="form-check-label" for="superuserYes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="superuserStatus" id="superuserNo">
+                        <label class="form-check-label" for="superuserNo">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--        phan duoi-->
+    <div class="last-row ">
+        <div class="col-12  d-flex justify-content-between mt-2">
+            <button class="reset-button" type="button">
+                <i class="fas fa-sync-alt"></i> Reset Filter
+            </button>
+            <div>
+                <button type="button" class="btn btn-light mr-2">Cancel</button>
+                <button type="submit" class="btn btn-search">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap 4 JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .todo-container {
+            width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .todo-container h2 {
+            margin-bottom: 10px;
+        }
+        .input-group {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+        .input-group button {
+            padding: 8px 12px;
+            margin-left: 5px;
+            border: none;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        .action-icons {
+            display: flex;
+            gap: 10px;
+        }
+        .clear-btn {
+            padding: 8px 16px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="todo-container">
+    <h2>To Do List</h2>
+    <div class="input-group">
+        <input type="text" id="todo-input" placeholder="Name...">
+        <button id="add-item">Add Item</button>
+    </div>
+    <div id="error-message" class="error"></div>
+    <ul id="todo-list"></ul>
+    <button id="clear-items" class="clear-btn">Clear Items</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.getElementById('todo-input');
+        const addItemButton = document.getElementById('add-item');
+        const todoList = document.getElementById('todo-list');
+        const clearItemsButton = document.getElementById('clear-items');
+        const errorMessage = document.getElementById('error-message');
+
+        let todos = [];
+
+        function addTodo() {
+            const value = input.value.trim();
+            if (value === '') {
+                errorMessage.textContent = 'Please enter a valid item!';
+                return;
+            }
+            errorMessage.textContent = '';
+            todos.push(value);
+            renderTodos();
+            input.value = '';
+        }
+
+        function renderTodos() {
+            todoList.innerHTML = '';
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                const span = document.createElement('span');
+                span.textContent = todo;
+
+                // Action buttons container
+                const actions = document.createElement('div');
+                actions.classList.add('action-icons');
+
+                // Edit button
+                const editButton = document.createElement('button');
+                editButton.textContent = '✏️';
+                editButton.addEventListener('click', () => editItem(index));
+
+                // Delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '❌';
+                deleteButton.addEventListener('click', () => deleteItem(index));
+
+                actions.appendChild(editButton);
+                actions.appendChild(deleteButton);
+
+                li.appendChild(span);
+                li.appendChild(actions);
+                todoList.appendChild(li);
+            });
+        }
+
+        function editItem(index) {
+            input.value = todos[index];
+            deleteItem(index);  // Remove the item before editing
+        }
+
+        function deleteItem(index) {
+            todos.splice(index, 1);
+            renderTodos();
+        }
+
+        function clearTodos() {
+            todos = [];
+            renderTodos();
+        }
+
+        addItemButton.addEventListener('click', addTodo);
+        clearItemsButton.addEventListener('click', clearTodos);
+
+        // Handle Enter keypress for adding items
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodo();
+        });
+    });
+</script>
+<!--con cac gi the-->
+</body>
+</html>

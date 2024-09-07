@@ -1,0 +1,160 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+/* Container Layout */
+.container {
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* Section Styles */
+.header {
+    background-color: #1e1e2f;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.menu {
+    background-color: #f94144;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.hero {
+    background-color: #577590;
+    padding: 120px;
+    color: white;
+    text-align: center;
+}
+
+.main {
+    background-color: #495057;
+    padding: 50px;
+    color: white;
+    text-align: center;
+}
+
+.banner {
+    background-color: #f9c74f;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.extra {
+    background-color: #43aa8b;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.image {
+    background-color: #a8dadc;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+/* Mobile Layout */
+@media (max-width: 767px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablet Layout */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            "header header header header"
+            "hero hero hero hero"
+            "menu main main main"
+            "menu banner banner banner"
+            "menu extra extra image";
+    }
+
+    .header {
+        grid-area: header;
+    }
+
+    .menu {
+        grid-area: menu;
+    }
+
+    .hero {
+        grid-area: hero;
+    }
+
+    .main {
+        grid-area: main;
+    }
+
+    .banner {
+        grid-area: banner;
+    }
+
+    .extra {
+        grid-area: extra;
+    }
+
+    .image {
+        grid-area: image;
+    }
+}
+
+/* Desktop Layout */
+@media (min-width: 1024px) {
+    .container {
+        /* Thêm cột trống giữa Main và Extra-Image */
+        grid-template-columns: 1fr 1fr 1fr 1fr; /* 3 cột: Main, Trống, Extra-Image */
+        grid-template-rows: auto auto 1fr 1fr; /* 4 hàng: Header, Hero, Main, Banner */
+        grid-template-areas:
+            "header menu menu menu"
+            "hero hero hero hero"
+            "main main . extra"
+             "main main . image"
+            "banner banner banner banner"
+
+    }
+
+    .header {
+        grid-area: header;
+    }
+
+    .menu {
+        grid-area: menu;
+    }
+
+    .hero {
+        grid-area: hero;
+    }
+
+    .main {
+        grid-area: main;
+    }
+
+    .banner {
+        grid-area: banner;
+    }
+
+    .extra {
+        grid-area: extra;
+    }
+
+    .image {
+        grid-area: image;
+    }
+}
