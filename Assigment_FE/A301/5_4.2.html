@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakery Shop</title>
+    <style>
+        /* Basic CSS for layout styling */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .filter-buttons {
+            margin-bottom: 10px;
+        }
+        .filter-buttons button {
+            margin-right: 10px;
+            padding: 10px;
+        }
+        .item-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .item img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="filter-buttons">
+    <button id="btnAll">ALL</button>
+    <button id="btnCakes">CAKES</button>
+    <button id="btnCupcakes">CUPCAKES</button>
+    <button id="btnSweets">SWEETS</button>
+    <button id="btnDoughnuts">DOUGHNUTS</button>
+</div>
+
+<input type="text" id="searchInput" placeholder="Search for items..." />
+
+<div id="itemContainer" class="item-container"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>7_1</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<form id="equationForm">
+    <div>
+        <input type="radio" id="linear" name="equationType" value="linear" checked>
+        <label for="linear">Giải phương trình bậc nhất: ax + b = 0</label>
+    </div>
+    <div>
+        <input type="radio" id="quadratic" name="equationType" value="quadratic">
+        <label for="quadratic">Giải phương trình bậc 2: ax² + bx + c = 0</label>
+    </div>
+
+    <div>
+        <label for="a">Nhập a:</label>
+        <input type="text" id="a" name="a">
+    </div>
+    <div>
+        <label for="b">Nhập b:</label>
+        <input type="text" id="b" name="b">
+    </div>
+    <div id="cContainer" class="hidden">
+        <label for="c">Nhập c:</label>
+        <input type="text" id="c" name="c">
+    </div>
+
+    <button type="button" id="calculateButton">Tính toán</button>
+    <p id="result"></p>
+    <p id="error" class="error"></p>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        $('input[name="equationType"]').change(function () {
+            if ($('#linear').is(':checked')) {
+                $('#cContainer').addClass('hidden');
+            } else {
+                $('#cContainer').removeClass('hidden');
+            }
+        });
+
+
+        $('#calculateButton').click(function () {
+            const a = parseFloat($('#a').val());
+            const b = parseFloat($('#b').val());
+            const c = parseFloat($('#c').val());
+            const isLinear = $('#linear').is(':checked');
+
+
+            $('#result').text('');
+            $('#error').text('');
+
+            // Validate input
+            if (isNaN(a) || isNaN(b) || (!isLinear && isNaN(c))) {
+                $('#error').text('Vui lòng nhập giá trị hợp lệ cho tất cả các trường.');
+                return;
+            }
+
+
+            if (isLinear) {
+                if (a === 0) {
+                    $('#result').text(b === 0 ? 'Phương trình vô số nghiệm.' : 'Phương trình vô nghiệm.');
+                } else {
+                    const result = -b / a;
+                    $('#result').text('Nghiệm của phương trình là: x = ' + result);
+                }
+            } else {
+
+                const delta = b * b - 4 * a * c;
+                if (a === 0) {
+                    $('#error').text('Giá trị a không thể bằng 0 khi giải phương trình bậc hai.');
+                } else if (delta < 0) {
+                    $('#result').text('Phương trình vô nghiệm.');
+                } else if (delta === 0) {
+                    const result = -b / (2 * a);
+                    $('#result').text('Phương trình có nghiệm kép: x = ' + result);
+                } else {
+                    const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                    const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                    $('#result').text('Phương trình có hai nghiệm: x₁ = ' + x1 + ', x₂ = ' + x2);
+                }
+            }
+        });
+
+
+        $('input[type="text"]').on('input', function () {
+            this.value = this.value.replace(/[^0-9.-]/g, '');
+        });
+    });
+</script>
+
+</body>
+</html>

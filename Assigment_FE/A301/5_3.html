@@ -14,6 +14,7 @@
             height: 100vh;
             background-color: #f9f9f9;
         }
+
         .todo-container {
             width: 400px;
             background: #fff;
@@ -22,13 +23,16 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+
         .todo-container h2 {
             margin-bottom: 10px;
         }
+
         .input-group {
             display: flex;
             margin-bottom: 10px;
         }
+
         .input-group input {
             flex: 1;
             padding: 8px;
@@ -36,6 +40,7 @@
             border-radius: 4px;
             outline: none;
         }
+
         .input-group button {
             padding: 8px 12px;
             margin-left: 5px;
@@ -45,15 +50,32 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        .error {
-            color: red;
-            font-size: 12px;
+
+        .feedback {
+            display: none;
             margin: 5px 0;
+            font-size: 12px;
+            transition: opacity 0.5s ease;
         }
+
+        .feedback.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .feedback.error {
+            color: red;
+        }
+
+        .feedback.success {
+            color: green;
+        }
+
         ul {
             list-style: none;
             padding: 0;
         }
+
         li {
             display: flex;
             justify-content: space-between;
@@ -61,11 +83,32 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-bottom: 5px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
+
+        li.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        li.remove {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .highlight {
+            background-color: #ffffe0;
+            transition: background-color 0.5s ease;
+        }
+
         .action-icons {
             display: flex;
             gap: 10px;
         }
+
         .clear-btn {
             padding: 8px 16px;
             background-color: #dc3545;
@@ -74,6 +117,7 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
+            display: none; /* ẩn nút Clear */
         }
     </style>
 </head>
@@ -85,7 +129,7 @@
         <input type="text" id="todo-input" placeholder="Name...">
         <button id="add-item">Add Item</button>
     </div>
-    <div id="error-message" class="error"></div>
+    <div id="feedback" class="feedback"></div>
     <ul id="todo-list"></ul>
     <button id="clear-items" class="clear-btn">Clear Items</button>
 </div>
@@ -96,20 +140,39 @@
         const addItemButton = document.getElementById('add-item');
         const todoList = document.getElementById('todo-list');
         const clearItemsButton = document.getElementById('clear-items');
-        const errorMessage = document.getElementById('error-message');
+        const feedback = document.getElementById('feedback');
 
         let todos = [];
+        let editModeIndex = null; // chọn ìndex của items đang edit
 
-        function addTodo() {
+        function showFeedback(message, type) {
+            feedback.textContent = message;
+            feedback.className = `feedback show ${type}`;
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2000);
+        }
+
+        function addOrUpdateTodo() {
             const value = input.value.trim();
             if (value === '') {
-                errorMessage.textContent = 'Please enter a valid item!';
+                showFeedback('Please enter a valid item!', 'error');
                 return;
             }
-            errorMessage.textContent = '';
-            todos.push(value);
-            renderTodos();
+
+            if (editModeIndex !== null) {
+                // Update existing item
+                todos[editModeIndex] = value;
+                editModeIndex = null; // Reset edit mode
+                showFeedback('Item updated successfully!', 'success');
+            } else {
+                // Add new item
+                todos.push(value);
+                showFeedback('Item added successfully!', 'success');
+            }
+
             input.value = '';
+            renderTodos();
         }
 
         function renderTodos() {
@@ -131,7 +194,7 @@
                 // Delete button
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = '❌';
-                deleteButton.addEventListener('click', () => deleteItem(index));
+                deleteButton.addEventListener('click', () => deleteItem(index, li));
 
                 actions.appendChild(editButton);
                 actions.appendChild(deleteButton);
@@ -139,33 +202,54 @@
                 li.appendChild(span);
                 li.appendChild(actions);
                 todoList.appendChild(li);
+
+                // Add the animation class
+                requestAnimationFrame(() => {
+                    li.classList.add('show');
+                });
             });
+            updateClearButtonVisibility();
         }
 
         function editItem(index) {
             input.value = todos[index];
-            deleteItem(index);  // Remove the item before editing
+            editModeIndex = index; // Set the index to edit mode
+            input.classList.add('highlight');
+            setTimeout(() => input.classList.remove('highlight'), 500);
+            showFeedback('Item ready to edit.', 'success');
         }
 
-        function deleteItem(index) {
-            todos.splice(index, 1);
-            renderTodos();
+        function deleteItem(index, li) {
+            li.classList.add('remove');
+            setTimeout(() => {
+                todos.splice(index, 1);
+                renderTodos();
+                showFeedback('Item deleted successfully!', 'success');
+            }, 300); // Wait for the fade-out animation to complete
         }
 
         function clearTodos() {
             todos = [];
             renderTodos();
+            showFeedback('All items cleared!', 'success');
         }
 
-        addItemButton.addEventListener('click', addTodo);
+        function updateClearButtonVisibility() {
+            clearItemsButton.style.display = todos.length > 0 ? 'block' : 'none';
+        }
+
+        addItemButton.addEventListener('click', addOrUpdateTodo);
         clearItemsButton.addEventListener('click', clearTodos);
 
-        // Handle Enter keypress for adding items
+        // bấm enter để nhập dữ liệu
         input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addTodo();
+            if (e.key === 'Enter') addOrUpdateTodo();
         });
+
+        // Initial check to set the Clear Items button visibility
+        updateClearButtonVisibility();
     });
 </script>
-<!--con cac gi the-->
+
 </body>
 </html>

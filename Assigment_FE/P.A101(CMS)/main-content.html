@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Form Layout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <ul>
+            <li><a href="#" id="viewProfile">Edit Profile</a></li>
+            <li><a href="#" id="formContent">Form Content</a></li>
+            <li><a href="#" id="viewContent">View Content</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Edit Profile Form -->
+        <div id="editProfile" class="form-container">
+            <h2>Edit Profile</h2>
+            <form id="profileForm">
+                <label>First Name</label>
+                <input type="text" name="firstName" placeholder="Enter the first name">
+
+                <label>Last Name</label>
+                <input type="text" name="lastName" placeholder="Enter the last name">
+
+                <label>Email</label>
+                <input type="email" name="email" placeholder="your_email@example.com">
+
+                <label>Phone</label>
+                <input type="tel" name="phone" placeholder="Enter your phone number">
+
+                <label>Description</label>
+                <textarea name="description" placeholder="Enter description"></textarea>
+
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+        <!-- Add Content Form -->
+        <div id="addContent" class="form-container" style="display: none;">
+            <h2>Add Content</h2>
+            <form id="contentForm">
+                <label>Title</label>
+                <input type="text" name="title" placeholder="Enter the title">
+
+                <label>Brief</label>
+                <textarea name="brief" placeholder="Enter brief"></textarea>
+
+                <label>Content</label>
+                <textarea name="content" placeholder="Enter content"></textarea>
+
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+        <!-- View Content Section -->
+        <div id="contentList" class="form-container" style="display: none;">
+            <h2>View Content</h2>
+            <table id="contentTable">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Brief</th>
+                    <th>Content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Content rows will be appended here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

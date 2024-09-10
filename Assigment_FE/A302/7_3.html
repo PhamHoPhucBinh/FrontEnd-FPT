@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Form Validation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        table {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <form id="infoForm">
+        <div class="row">
+            <!-- Personal Info -->
+            <div class="col-md-6">
+                <h5>Personal Info</h5>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                    <small class="error" id="firstNameError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                    <small class="error" id="lastNameError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" placeholder="Email">
+                    <small class="error" id="emailError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Phone">
+                    <small class="error" id="phoneError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                    <small class="error" id="addressError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" placeholder="City">
+                    <small class="error" id="cityError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <select class="form-control" id="state">
+                        <option value="">Choose...</option>
+                        <option value="NY">New York</option>
+                        <option value="CA">California</option>
+                    </select>
+                    <small class="error" id="stateError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="zip">Zip Code</label>
+                    <input type="text" class="form-control" id="zip" placeholder="Zip Code">
+                    <small class="error" id="zipError"></small>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkMeOut">
+                    <label class="form-check-label" for="checkMeOut">Check me out</label>
+                    <small class="error" id="checkMeOutError"></small>
+                </div>
+            </div>
+
+            <!-- Payment Info -->
+            <div class="col-md-6">
+                <h5>Payment Info</h5>
+                <div class="form-group">
+                    <label for="nameOnCard">Name on Card</label>
+                    <input type="text" class="form-control" id="nameOnCard" placeholder="John More Doe">
+                    <small class="error" id="nameOnCardError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">Credit Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" placeholder="1111-2222-3333-4444">
+                    <small class="error" id="cardNumberError"></small>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="expMonth">Exp Month</label>
+                        <input type="text" class="form-control" id="expMonth" placeholder="MM">
+                        <small class="error" id="expMonthError"></small>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="expYear">Exp Year</label>
+                        <input type="text" class="form-control" id="expYear" placeholder="YYYY">
+                        <small class="error" id="expYearError"></small>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                        <small class="error" id="cvvError"></small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Accepted Cards</label>
+                    <div>
+                        <img src="https://via.placeholder.com/40x20" alt="Visa">
+                        <img src="https://via.placeholder.com/40x20" alt="Mastercard">
+                        <img src="https://via.placeholder.com/40x20" alt="Discover">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sign In Button -->
+        <button type="button" class="btn btn-primary" id="signInBtn">Sign In</button>
+    </form>
+
+    <!-- Data Table -->
+    <table class="table table-bordered mt-3" id="dataTable">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Card Name</th>
+            <th>Card Number</th>
+            <th>Exp Date</th>
+            <th>CVV</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for Delete Confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa Record Data này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Validation and Form Submission
+        $("#signInBtn").click(function () {
+            let valid = true;
+            $(".error").text(""); // Clear previous errors
+
+            // Validate First Name
+            const firstName = $("#firstName").val().trim();
+            if (!/^[A-Za-z]+$/.test(firstName)) {
+                $("#firstNameError").text("Only letters are allowed, no spaces or special characters.");
+                valid = false;
+            }
+
+            // Validate Last Name
+            const lastName = $("#lastName").val().trim();
+            if (!/^[A-Za-z]+$/.test(lastName)) {
+                $("#lastNameError").text("Only letters are allowed, no spaces or special characters.");
+                valid = false;
+            }
+
+            // Validate Email
+            const email = $("#email").val().trim();
+            if (!/^[A-Za-z0-9]+@fsoft\.com\.vn$/.test(email)) {
+                $("#emailError").text("Email must follow the format: user@fsoft.com.vn.");
+                valid = false;
+            }
+
+            // Validate Phone
+            const phone = $("#phone").val().trim();
+            if (!/^\d{10}$/.test(phone)) {
+                $("#phoneError").text("Phone must be exactly 10 digits.");
+                valid = false;
+            }
+
+            // Validate Address
+            const address = $("#address").val().trim();
+            if (!/^[A-Za-z]+$/.test(address)) {
+                $("#addressError").text("Only letters are allowed, no spaces or special characters.");
+                valid = false;
+            }
+
+            // Validate City
+            const city = $("#city").val().trim();
+            if (!/^[A-Za-z]+$/.test(city)) {
+                $("#cityError").text("Only letters are allowed, no spaces or special characters.");
+                valid = false;
+            }
+
+            // Validate State
+            const state = $("#state").val();
+            if (state === "") {
+                $("#stateError").text("Please select a state.");
+                valid = false;
+            }
+
+            // Validate Zip Code
+            const zip = $("#zip").val().trim();
+            if (!/^\d{5}$/.test(zip)) {
+                $("#zipError").text("Zip Code must be exactly 5 digits.");
+                valid = false;
+            }
+
+            // Validate Check Me Out
+            if (!$("#checkMeOut").is(":checked")) {
+                $("#checkMeOutError").text("You must check this box.");
+                valid = false;
+            }
+
+            // Validate Name on Card
+            const nameOnCard = $("#nameOnCard").val().trim();
+            if (!/^[A-Za-z]+$/.test(nameOnCard)) {
+                $("#nameOnCardError").text("Only letters are allowed, no spaces or special characters.");
+                valid = false;
+            }
+
+            // Validate Credit Card Number
+            const cardNumber = $("#cardNumber").val().trim();
+            if (!/^\d{4}-\d{4}-\d{4}-\d{4}$/.test(cardNumber)) {
+                $("#cardNumberError").text("Card Number must be in format xxxx-xxxx-xxxx-xxxx.");
+                valid = false;
+            }
+
+            // Validate Exp Month
+            const expMonth = $("#expMonth").val().trim();
+            if (!/^(0[1-9]|1[0-2])$/.test(expMonth)) {
+                $("#expMonthError").text("Exp Month must be between 01 and 12.");
+                valid = false;
+            }
+
+            // Validate Exp Year
+            const expYear = $("#expYear").val().trim();
+            if (!/^\d{4}$/.test(expYear) || parseInt(expYear) <= 2000) {
+                $("#expYearError").text("Exp Year must be greater than 2000.");
+                valid = false;
+            }
+
+            // Validate CVV
+            const cvv = $("#cvv").val().trim();
+            if (!/^\d{3}$/.test(cvv)) {
+                $("#cvvError").text("CVV must be exactly 3 digits.");
+                valid = false;
+            }
+
+            // If valid, add data to table
+            if (valid) {
+                const row = `
+                    <tr>
+                        <td>${firstName}</td>
+                        <td>${lastName}</td>
+                        <td>${email}</td>
+                        <td>${phone}</td>
+                        <td>${address}</td>
+                        <td>${city}</td>
+                        <td>${state}</td>
+                        <td>${zip}</td>
+                        <td>${nameOnCard}</td>
+                        <td>${cardNumber}</td>
+                        <td>${expMonth}/${expYear}</td>
+                        <td>${cvv}</td>
+                        <td><a href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                `;
+                $("#dataTable tbody").append(row);
+                $("#infoForm")[0].reset(); // Reset form
+            }
+        });
+
+        // Delete row
+        $("#dataTable").on("click", ".delete-link", function (e) {
+            e.preventDefault();
+            const row = $(this).closest("tr");
+            $("#deleteModal").modal("show");
+
+            // Confirm delete
+            $("#confirmDelete").off("click").on("click", function () {
+                row.remove();
+                $("#deleteModal").modal("hide");
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
